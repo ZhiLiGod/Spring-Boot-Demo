@@ -1,4 +1,4 @@
-package com.zhi.springboot.user.test;
+package com.zhi.springboot.order.test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 
 import net.minidev.json.JSONObject;
@@ -24,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserControllerTest {
+public class OrderControllerTest {
 	
 	private MockMvc mockMVC;
 	
@@ -37,46 +38,39 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void testAddUser() throws Exception {
+	public void testAddOrder() throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("name", "zhang111");
-		map.put("sex", "1");
-		MvcResult result = mockMVC.perform(post("/users")
+		//String oid = UUID.randomUUID().toString().replaceAll("-", "");
+		//map.put("oid", "aaa");
+		map.put("user_id", "8");
+		map.put("address", "上海");
+		map.put("phone", "56789aa");
+		MvcResult result = mockMVC.perform(post("/addOrder")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(JSONObject.toJSONString(map)))
 				.andExpect(status().isOk())
-				.andReturn();
+				.andReturn();		
 		System.out.println(result.getResponse().getContentAsString());		
 	}
 	
 	@Test
-	public void testFindOrdersByUid() throws Exception{
-		MvcResult result = mockMVC.perform(get("/user/orders")
+	public void testFindUsers() throws Exception{
+		MvcResult result = mockMVC.perform(post("/orders")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content("8"))
+				.content(""))
 				.andExpect(status().isOk())
-				.andReturn();
-		System.out.println(result.getResponse().getContentAsString());
+				.andReturn();		
+		System.out.println(result.getResponse().getContentAsString());		
 	}
 	
-	@Test
-	public void testFindByOrdersUserId() throws Exception{
-		MvcResult result = mockMVC.perform(get("/user/orders")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("8"))
-				.andExpect(status().isOk())
-				.andReturn();
-		System.out.println(result.getResponse().getContentAsString());
-	}
-	
-	@Test
-	public void testFindAll() throws Exception{
-		MvcResult result = mockMVC.perform(get("/user"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andReturn();
-				
-		System.out.println(result.getResponse().getContentAsString());	
-	}
+//	@Test
+//	public void testFindAll() throws Exception{
+//		MvcResult result = mockMVC.perform(get("/user"))
+//				.andExpect(status().isOk())
+//				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//				.andReturn();
+//				
+//		System.out.println(result.getResponse().getContentAsString());	
+//	}
 
 }

@@ -3,12 +3,15 @@ package com.zhi.springboot.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -42,7 +45,17 @@ public class User {
   
     @Column(name = "doubleprice", nullable = true, length = 10)  
     private double doubleprice;
+    
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="user")
+	private List<Orders> orders;
 
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
 
 	public int getId() {
 		return id;
