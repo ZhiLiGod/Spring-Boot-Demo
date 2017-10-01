@@ -43,6 +43,18 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.findByOrders_User_Id(user_id);
 	}
+
+	@Override
+	public User findUserByUsername(String name) throws Exception {
+		
+		return userDao.findByName(name);
+	}
+
+	@Override
+	public User findUserByUsernameAndPassword(String name, String password) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.findByNameAndPassword(name, password);
+	}
 	
 	
 	

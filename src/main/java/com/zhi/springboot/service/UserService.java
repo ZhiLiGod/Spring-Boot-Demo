@@ -15,4 +15,8 @@ public interface UserService {
 
 	public List<Orders> findOrdersByUid(int user_id) throws Exception;
 	public User findByOrdersUserId(int user_id) throws Exception;
+
+	public User findUserByUsername(String name) throws Exception;
+
+	public User findUserByUsernameAndPassword(String name, String password) throws Exception;
 }	

@@ -15,14 +15,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	@NotEmpty(message="User name is empty!")
 	@Column(name="name", nullable=true, length=30)
 	private String name;
+	
+	@NotEmpty(message="Password is empty")
+	@Length(min=5, message="Password should greater than 6 characters")
+	@Column(name="password", nullable=true, length=32)
+	private String password;
 	
 	@Column(name = "height", nullable = true, length = 10)  
 	private int height; 
@@ -76,6 +85,13 @@ public class User {
 		this.name = name;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public int getSex() {
 		return sex;
@@ -144,6 +160,15 @@ public class User {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password
+				+ ", height=" + height + ", sex=" + sex + ", birthday="
+				+ birthday + ", sendtime=" + sendtime + ", price=" + price
+				+ ", floatprice=" + floatprice + ", doubleprice=" + doubleprice
+				+ ", orders=" + orders + "]";
 	} 
     
     
