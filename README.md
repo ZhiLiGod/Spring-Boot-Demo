@@ -1,4 +1,4 @@
-# Spring Boot Demo with Spring Data JPA and MySql
+# Spring Boot Demo with Spring Data JPA (Paging) and MySql
 ## Spring Data JPA operations
  <br/>
  findByNameAndSex(String name, int sex)<br/>
